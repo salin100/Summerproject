@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <div class="container m-4">
+        <div class="row justify-content-center" >
+            <div class="col-md-4">
+                <div class="card">
+                    <form method="POST", action="" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="form-group m-3">
+                            <label>Product Name</label>
+                            <input required name="name" type="text" class="form-control">
+                          </div>
+                       
+                        
+                          <div class="form-group m-3">
+                            <label>Price</label>
+                            <input required name="price" type="text" class="form-control">
+                          </div>
+
+                          <div class="form-group m-3">
+                            <label>Category</label>
+                            <Select name="category" class="form-control"> 
+                            <option value="none">Category</option>
+
+                            {% for category in categories %}
+                            <option value="{{category.id}}">{{category.name}}</option>
+
+                            {% endfor %}
+                        </Select>
+                          </div>
+
+                          <div class="form-group m-3">
+                            <label>New Category</label>
+                            <input name="category_new" type="text" class="form-control">
+                          </div>
+
+                        <div class="form-group m-3">
+                            <label>Description</label>
+                            <input required name="description" type="text" class="form-control">
+                          </div>
+
+                          
+
+                        <div class="form-group m-3">
+                          <label>Upload Imge</label><br>
+                          <input required name="image" type="file" class="form-control-file">
+                        </div>
+
+                        
+                            <button type="submit" class="btn btn-success m-3">Submit</button>
+                          
+
+                        
+                        
+                      </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

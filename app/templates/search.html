@@ -1,0 +1,95 @@
+{% extends 'welcome.html' %}
+
+
+{% block content %}
+{% include 'customerbase.html' %}
+
+<div class="container m-2" >
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                  Categories 
+                </div>
+
+               <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a href="">All</a>
+
+                </li>
+               
+                  
+            
+                </ul>
+              </div>
+
+              <div class="card" style="width: 18rem;">
+
+
+               <ul class="list-group list-group-flush">
+                {% if user.is_superuser %}
+                <li class="list-group-item">
+                  <a href="{% url 'add_product' %}">Add Products</a>
+                  </li>
+                {% endif %}
+               
+
+                
+                 
+
+                 
+              </div>
+              
+              
+              
+        </div>
+
+
+        
+    
+    <div class="col-md-9">
+     
+        <div class="row">
+
+          {% for s in search %}
+            <div class="col-md-4">
+             
+                <div class="card">
+                  
+                    <img class="card-img-top" src="{{s.image.url}}" alt="Card image cap" style="height: 200px;" >
+                    <div class="card-body">
+                      <h5 class="card-title">Category: {{s.category.name}}</h5>
+                      <b class="card-text">Name: {{s.name}}</b><br>
+                      <b class="card-text">Price: {{s.price}}</b><br>
+
+                    
+
+                       
+                    </div>
+                    <a href="{% url 'view_product' s.id %}" class="btn btn-outline-primary btn-sm m-1">View</a>
+                    <a href="{% url 'update_product' s.id %}" class="btn btn-outline-primary btn-sm m-1">Update</a>
+
+                  </div>
+                  <br>
+                 </div>
+                 {% empty %}
+                 <h1>Sorry nothings Available at the moment</h1>
+            {% endfor %}
+            
+               
+
+            
+                
+
+            </div>
+           
+        </div>
+        
+    </div>
+</div>
+
+</div>
+
+
+
+{% endblock %}

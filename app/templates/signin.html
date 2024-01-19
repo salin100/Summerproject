@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} 
+login page
+{% load crispy_forms_tags %}
+{% endblock %}
+{% block content %}
+
+<link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<h1 style="text-align: center;"><em><strong>Log in</strong></em></h1>
+
+<div class="container">
+    <div class="row mt-3 ">
+        <div class="col-md-6 offset-3">
+            <div class="border p-5 pt-5 shadow p-3 mb-5 bg-white rounded bg-">
+                <form method="POST"> 
+                    {% csrf_token %}
+                    
+                    {{form|crispy}}
+
+                    <div class="text-center">
+               <input type="submit" value="Log in" class="btn btn-secondary"> <br>
+               <small class="text-muted">
+                Don't Have An Account?  <a class="ml-2" href="/signup">Sign up</a>
+            </small>
+                    </div>
+                    
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    
+</div>
+
+
+
+
+      
+{% endblock %}

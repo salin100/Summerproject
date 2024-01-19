@@ -1,0 +1,25 @@
+
+
+{% block content %}
+
+    {% if user.is_superuser %}
+
+        {% include 'admindashboard.html' %}
+
+    {% elif user.is_active %}
+
+    {% include 'customerdashboard.html' %}
+
+    {% else %}
+
+    {% include 'index.html' %}
+
+
+
+
+    {% endif %}
+
+   
+
+
+{% endblock %}

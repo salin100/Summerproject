@@ -1,0 +1,161 @@
+{% extends 'welcome.html' %}
+
+
+{% block content %}
+
+
+{% include 'adminbase.html' %}
+
+<script src="https://kit.fontawesome.com/dd32011c7e.js" crossorigin="anonymous"></script>
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <!-- <div class="alert alert-success justify-content-centre">
+
+                        {{message}}
+                    </div> -->
+                    <Script>
+                      alert('This Item is already on the cart')
+                    </Script>
+                    {% endfor %}
+                    {% endif %}
+
+
+<div class="container m-2" >
+    <div class="row">
+        <div class="col-md-3">
+            <div class="" style="width: 18rem;">
+                <div class=" border rounded mt-3 p-3 text-center shadow bg-white rounded">
+                  Categories 
+                </div>
+
+               <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a href="{% url 'products' %}" class="nav-link text-dark active">All</a>
+
+                </li>
+                {% for category in categories %}
+                <li class="list-group-item">
+                  <a href="{% url 'products' %}?category={{category.name}}" class="nav-link active">
+                    {{category.name}}
+
+                  </a>
+                </li>
+                {% endfor %}            
+                  
+            
+                </ul>
+              </div>
+              <br>
+              
+              <div class="card" style="width: 18rem;">
+                {% if user.is_authenticated and user.is_superuser %}
+
+                {% elif user.is_authenticated %}
+
+                <div class="card-header">
+                  Your Cart 
+                </div>
+                
+                
+                <li class="list-group-item">
+                <td> <a class="nav-link active" aria-current="page" href="{% url 'cart_items' %}"><i class="fa-solid fa-cart-arrow-down"></i> {{ cart }}</a> </td> 
+
+                
+                {% endif %}
+                
+                </li>       
+                  
+            
+                </ul>
+              </div>
+              <br>
+
+              {% if user.is_superuser %}
+
+              <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                  Add New Products 
+                </div>
+                
+                <li class="list-group-item">
+                  <a href="{% url 'add_product' %}" class="nav-link active"> <i class="fa-solid fa-plus"></i> Add Products</a>
+                  </li>
+                
+                </li>       
+                  
+            
+                </ul>
+              </div>
+              {% endif %}
+
+              
+              
+              
+        </div>
+
+
+        
+    
+    <div class="col-md-9">
+     
+        <div class="row">
+
+          {% for product in products %}
+            <div class="col-md-4">
+             
+                <div class="card">
+                  
+                    <img class="card-img-top" src="{{product.image.url}}" alt="Card image cap" style="height: 200px;" >
+                    <div class="card-body">
+                      <h5 class="card-title">Category: {{product.category.name}}</h5>
+                      <b class="card-text">Name: {{product.name}}</b><br>
+                      <b class="card-text">Price: {{product.price}}</b><br>
+
+                    
+
+                      
+                    </div>
+                    <a href="{% url 'view_product' product.id %}" class="btn btn-outline-primary btn-sm m-1">View</a>
+                   
+                    
+                    
+                    
+                    
+
+
+
+                    
+                    
+                    {% if user.is_superuser %}
+                              <a href="{% url 'update_product' product.id %}" class="btn btn-outline-primary btn-sm m-1">Update</a>
+                              <a href="{% url 'delete_product' product.id %}" class="btn btn-outline-primary btn-sm m-1">Delete</a>
+
+                    {% elif user.is_active %}
+                    <a href="{% url 'cart' product.id %}" class="btn btn-outline-primary btn-sm m-1">Add to cart</a>
+                    {% endif %}
+
+                  </div>
+                  <br>
+                 </div>
+                 {% empty %}
+                 <h1>Sorry nothings Available at the moment</h1>
+            {% endfor %}
+            
+               
+
+            
+                
+
+            </div>
+           
+        </div>
+        
+    </div>
+</div>
+
+</div>
+
+
+
+{% endblock %}
